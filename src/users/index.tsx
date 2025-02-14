@@ -2,11 +2,11 @@ import Box from '@mui/material/Box';
 import { Button, TextField, Typography } from "@mui/material";
 import { useUserStore } from '../store';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { redirect } from 'react-router-dom';
 
-function Home () {
+function Users () {
     const { setName, name } = useUserStore();
-    const navigate = useNavigate();
+
     const handleName = (value: string) => {
         if(value !== null && value !== "") setName(value)
     }
@@ -15,7 +15,7 @@ function Home () {
         if(name === null || name === "") 
             return toast.error("Preencha seu nome para continuar!")
 
-        return navigate("/users")
+        return redirect("/users")
     }
 
     return (
@@ -45,8 +45,10 @@ function Home () {
                 placeholder='Digite o seu nome:'
                 sx={{
                     width: { xs: '90%', sm: '300px' },
+                    borderRadius: "4px",
                     marginBottom: "10px",
                     '& .MuiOutlinedInput-root': {
+                        height: 40,
                         '&:hover fieldset': {
                             borderColor: '#EC6724',
                         },
@@ -75,4 +77,4 @@ function Home () {
     );
 }
 
-export default Home;
+export default Users;
