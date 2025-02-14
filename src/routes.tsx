@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
 import { Toaster } from "react-hot-toast";
-import Users from "./components/users";
+import Logic from "./components/users/logic";
 
 function RoutesApp() {
   return (
@@ -10,7 +10,7 @@ function RoutesApp() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/users" element={<Users />} />
+          <Route path="/users" element={<Logic />} />
         </Routes>
       </BrowserRouter>
     </>
