@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./home";
+import Home from "./components/home";
 import { Toaster } from "react-hot-toast";
-import Users from "./users";
+import Users from "./components/users";
 
 function RoutesApp() {
   return (
