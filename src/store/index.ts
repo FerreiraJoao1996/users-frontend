@@ -16,6 +16,9 @@ interface UserStoreState {
 	setModalOpen: (open: boolean) => void;
 	openModal: () => void;
 	closeModal: () => void;
+
+	mode: 'create' | 'edit';
+	setMode: (name: 'create' | 'edit') => void;
 }
 
 export const useUserStore = create<UserStoreState>((set) => ({
@@ -50,5 +53,11 @@ export const useUserStore = create<UserStoreState>((set) => ({
 		set({
 			modalOpen: false,
 			userId: undefined
+		}),
+
+	mode: 'create',
+	setMode: (mode) =>
+		set({
+			mode
 		}),
 }));

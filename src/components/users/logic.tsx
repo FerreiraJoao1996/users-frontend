@@ -5,10 +5,16 @@ import { CreateUser, Users } from "./dto/users";
 import { useUserStore } from "../../store";
 import { useEffect } from "react";
 import Modal from "./modal";
+import toast from "react-hot-toast";
+import { useCreateUser } from "./api/create-user";
+import { useUpdateUser } from "./api/update-user";
 
 function Logic () {
-    const { data, isPending } = useUsers();
-    const { userId } = useUserStore();
+    const { data, isPending, refetch } = useUsers();
+    const { userId, mode, setModalOpen } = useUserStore();
+	const { mutateAsync: create} = useCreateUser();
+	const { mutateAsync: update} = useUpdateUser();
+    
     const userData = data?.data?.users.find(item => item.id === userId);
 
     const defaultValues: CreateUser = {
@@ -32,6 +38,43 @@ function Logic () {
 
     const onSubmit = (data: Users) => {
         console.log("data: ", data);
+
+		const handleSuccess = () => {
+			setModalOpen(false);
+			refetch();
+		};
+		
+		if (data.id) {
+			toast.promise(
+				update(
+					{ ...data },
+					{
+						onSuccess: () => {
+							refetch();
+							handleSuccess();
+						}
+					}
+				),
+				{
+					error: "Ocorreu um erro ao atualizar o usuário.",
+					success: "Usuário atualizado com sucesso.",
+					loading: 'Atualizando usuário'
+				}
+			);
+		} else {
+			toast.promise(
+				create(data, {
+					onSuccess: () => {
+						handleSuccess();
+					}
+				}),
+				{
+					error: "Ocorreu um erro ao criar o usuário.",
+					success: "Usuário criado com sucesso.",
+					loading: 'Criando usuário'
+				}
+			);
+		}
 	};
 
     if(isPending || !data?.data?.users) {
@@ -47,7 +90,7 @@ function Logic () {
             <Modal
                 form={form}
                 onSubmit={onSubmit}
-                mode="edit"
+                mode={mode}
             />
         </>
     );
