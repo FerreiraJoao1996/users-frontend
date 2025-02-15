@@ -1,14 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import api from "../../../configs/api";
-
-export interface Users {
-    id: number;
-    name: string;
-    salary: string;
-    company_value: string;
-    createdAt: string;
-    updatedAt: string;
-}
+import { Users } from "../dto/users";
 
 interface Response {
 	users: Users[]
