@@ -33,12 +33,17 @@ export const useUserStore = create<UserStoreState>((set) => ({
 			userId
 		}),
 	users: [],
-  	setUsers: (users) => set({ users }),
-  	addUser: (user) => set((state) => ({ users: [...state.users, user] })),
-  	removeUser: (id) =>
-    	set((state) => ({ 
-			users: state.users.filter((user) => user.id !== id) 
-		})),
+	setUsers: (users) => set({ users }),
+	addUser: (user) => set((state) => {
+		if (!state.users.some((existingUser) => existingUser.id === user.id)) {
+		return { users: [...state.users, user] };
+		}
+		return state;
+	}),
+	removeUser: (id) =>
+		  set((state) => ({
+			users: state.users.filter((user) => user.id !== id),
+		  })),
 
 	modalOpen: false,
 	setModalOpen: (open) =>
