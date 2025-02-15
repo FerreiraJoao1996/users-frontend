@@ -8,8 +8,6 @@ interface Response {
 
 const getUsers = async () => {
 	const response = await api.get<Response>(`/user`);
-	console.log(response) 
-
 	return response
 };
 

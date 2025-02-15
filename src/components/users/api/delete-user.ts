@@ -13,7 +13,6 @@ export const useDeleteUser = () => {
 		mutationFn: (userId: number) => deleteUser(userId),
 		mutationKey: mutationKey,
 		onSuccess: (response) => {
-			console.log("response: ", response)
 		}
 	});
 };

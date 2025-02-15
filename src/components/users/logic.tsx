@@ -37,7 +37,6 @@ function Logic () {
     }, [userData]);
 
     const onSubmit = (data: Users) => {
-        console.log("data: ", data);
 
 		const handleSuccess = () => {
 			setModalOpen(false);
