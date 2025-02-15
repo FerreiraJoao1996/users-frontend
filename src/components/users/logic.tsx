@@ -51,6 +51,13 @@ function Logic() {
 
         const handleSuccess = () => {
             setModalOpen(false);
+
+            form.reset({
+                name: "",
+                salary: "",
+                company_value: ""
+            });
+
             refetch();
         };
 
