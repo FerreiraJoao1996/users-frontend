@@ -1,4 +1,5 @@
-import { Box, Button, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Button, Typography, Select, MenuItem, Pagination, SelectChangeEvent } from '@mui/material';
 import { Users } from './dto/users';
 import { UseFormReturn } from 'react-hook-form';
 import AddIcon from '@mui/icons-material/Add';
@@ -24,7 +25,10 @@ function View(props: Props) {
     const { addUser, removeUser, users } = useUserPersistStore();
     const { openModal, closeModal } = useDeleteStore();
     const { refetch } = useUsers();
-    
+
+    const [itemsPerPage, setItemsPerPage] = useState(16);
+    const [currentPage, setCurrentPage] = useState(1);
+
     const handleAdd = (user: Users) => addUser(user);
     const handleRemove = (id: number) => removeUser(id);
 
@@ -61,60 +65,106 @@ function View(props: Props) {
         setMode('create');
     };
 
+    const handleItemsPerPageChange = (event: SelectChangeEvent<number>) => {
+        const value = event.target.value as number;
+        setItemsPerPage(value);
+    };
+
+    const handlePageChange = (_event: React.ChangeEvent<unknown>, value: number) => {
+        setCurrentPage(value);
+    };
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentItems = data.slice(startIndex, endIndex);
+
     return (
-        <Box sx={{ marginBottom: 2 }}>
+        <>
             <Box
-                mb={2}
                 sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 2,
-                    justifyContent: 'space-between',
+                    display: "flex",
+                    justifyContent:"space-between",
+                    alignItems: "center"
                 }}
             >
-                {data.map((item) => (
-                    <Box
-                        key={item.id}
+                <Typography variant="h5" textAlign={'start'} mb={2}>
+                    <strong>{currentItems.length}</strong> clientes encontrados:
+                </Typography>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "center"
+                    }}
+                >
+                    <Typography variant="h5" textAlign={'start'} mb={2}>
+                        Clientes por página:&nbsp;
+                    </Typography>
+                    <Select
                         sx={{
-                            flex: '1 1 20%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: 2,
-                            borderRadius: '4px',
-                            boxShadow: '0px 0px 4px 0px #0000001A',
-                            '@media (max-width: 1024px)': {
-                                flex: '1 1 45%',
-                            },
-                            '@media (max-width: 600px)': {
-                                flex: '1 1 100%',
-                            }
+                            width: '75px',
+                            height: "30px",
                         }}
+                        value={itemsPerPage}
+                        onChange={handleItemsPerPageChange}
                     >
-                        <Typography>{item.name}</Typography>
-                        <Typography>{item.salary}</Typography>
-                        <Typography>{item.company_value}</Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
-                            {users.find(user => user.id === item.id) ? 
-                                <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
-                                    <RemoveIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
-                                </Button> :
-                                <Button sx={{ flex: 1 }} onClick={() => handleAdd(item)}>
-                                    <AddIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
-                                </Button>
-                            }
-                            <Button sx={{ flex: 1 }} onClick={() => handleEdit(item.id)}>
-                                <CreateIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
-                            </Button>
-                            <Button sx={{ flex: 1 }} onClick={() => handleDelete(item)}>
-                                <DeleteIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
-                            </Button>
-                        </Box>
-                    </Box>
-                ))}
+                        <MenuItem value={8}>8</MenuItem>
+                        <MenuItem value={16}>16</MenuItem>
+                        <MenuItem value={24}>24</MenuItem>
+                    </Select>
+                </Box>
             </Box>
-            <Box>
+            <Box sx={{ marginBottom: 2 }}>
+                <Box
+                    mb={2}
+                    sx={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 2,
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    {currentItems.map((item) => (
+                        <Box
+                            key={item.id}
+                            sx={{
+                                flex: '1 1 20%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                padding: 2,
+                                borderRadius: '4px',
+                                boxShadow: '0px 0px 4px 0px #0000001A',
+                                '@media (max-width: 1024px)': {
+                                    flex: '1 1 45%',
+                                },
+                                '@media (max-width: 600px)': {
+                                    flex: '1 1 100%',
+                                }
+                            }}
+                        >
+                            <Typography>{item.name}</Typography>
+                            <Typography>{item.salary}</Typography>
+                            <Typography>{item.company_value}</Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
+                                {users.find(user => user.id === item.id) ?
+                                    <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
+                                        <RemoveIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                    </Button> :
+                                    <Button sx={{ flex: 1 }} onClick={() => handleAdd(item)}>
+                                        <AddIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                    </Button>
+                                }
+                                <Button sx={{ flex: 1 }} onClick={() => handleEdit(item.id)}>
+                                    <CreateIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                </Button>
+                                <Button sx={{ flex: 1 }} onClick={() => handleDelete(item)}>
+                                    <DeleteIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                </Button>
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
                 <Button
                     type="submit"
                     variant="contained"
@@ -125,14 +175,36 @@ function View(props: Props) {
                         textTransform: 'none',
                         color: '#EC6724',
                         border: '2px solid #EC6724',
-                        boxShadow: 'none'
+                        boxShadow: 'none',
+                        marginBottom: 2
                     }}
                     onClick={handleAddNewUser}
                 >
                     Criar cliente
                 </Button>
+
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent:"center",
+                        alignItems: "center"
+                    }}
+                >
+                    <Pagination
+                        sx={{
+                            "& .Mui-selected": { 
+                                backgroundColor: "#EC6724",
+                                color: "white"
+                            }
+                        }}
+                        count={Math.ceil(data.length / itemsPerPage)}
+                        page={currentPage}
+                        onChange={handlePageChange}
+                        shape="rounded"
+                    />
+                </Box>
             </Box>
-        </Box>
+        </>
     );
 }
 

@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Logic from "./components/users/logic";
 import DeleteModal from "./components/modal/delete/delete";
 import SelectedUsers from "./components/selected-users.tsx";
+import Layout from "./components/layout/index.tsx";
 
 function RoutesApp() {
   return (
@@ -13,8 +14,17 @@ function RoutesApp() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/users" element={<Logic />} />
-          <Route path="/selected-users" element={<SelectedUsers />} />
+          <Route
+          path="/*"
+          element={
+            <Layout>
+              <Routes>
+                <Route path="/users" element={<Logic />} />
+                <Route path="/selected-users" element={<SelectedUsers />} />
+              </Routes>
+            </Layout>
+          }
+        />
         </Routes>
       </BrowserRouter>
     </>
