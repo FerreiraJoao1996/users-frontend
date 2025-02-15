@@ -4,6 +4,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { useUserPersistStore } from '../../store/user-persist';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { formatCurrency } from '../../utils/format-currency';
 
 
 function SelectedUsers() {
@@ -58,8 +59,8 @@ function SelectedUsers() {
                         }}
                     >
                         <Typography>{item.name}</Typography>
-                        <Typography>{item.salary}</Typography>
-                        <Typography>{item.company_value}</Typography>
+                        <Typography>{String(formatCurrency(item.salary))}</Typography>
+                        <Typography>{String(formatCurrency(item.company_value))}</Typography>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
                             <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
                                 <RemoveIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />

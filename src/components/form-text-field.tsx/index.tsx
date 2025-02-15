@@ -25,6 +25,14 @@ const FormTextField = (props: Props) => {
                         width: "100%",
                         fontWeight: "bold",
                         textTransform: "none",
+                        "& .MuiOutlinedInput-root": {
+                            "&:hover fieldset": {
+                                borderColor: "#EC6724",
+                            },
+                            "&.Mui-focused fieldset": {
+                                borderColor: "#EC6724",
+                            },
+                        },
                     }}
                     placeholder={placeholder ?? ""}
                     {...field}

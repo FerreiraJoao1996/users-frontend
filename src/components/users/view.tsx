@@ -12,6 +12,7 @@ import { useDeleteUser } from './api/delete-user';
 import { useUsers } from './api/get-users';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useUserPersistStore } from '../../store/user-persist';
+import { formatCurrency } from '../../utils/format-currency';
 
 interface Props {
     data: Users[];
@@ -143,9 +144,9 @@ function View(props: Props) {
                                 }
                             }}
                         >
-                            <Typography>{item.name}</Typography>
-                            <Typography>{item.salary}</Typography>
-                            <Typography>{item.company_value}</Typography>
+                            <Typography><strong>{item.name}</strong></Typography>
+                            <Typography>Salário: {String(formatCurrency(item.salary))}</Typography>
+                            <Typography mb={2}>Empresa: {String(formatCurrency(item.company_value))}</Typography>
                             <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
                                 {users.find(user => user.id === item.id) ?
                                     <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
@@ -159,7 +160,7 @@ function View(props: Props) {
                                     <CreateIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
                                 </Button>
                                 <Button sx={{ flex: 1 }} onClick={() => handleDelete(item)}>
-                                    <DeleteIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                    <DeleteIcon fontSize={'medium'} sx={{ color: "#ff0000", fontWeight: "bold", background: "none" }} />
                                 </Button>
                             </Box>
                         </Box>
@@ -192,9 +193,9 @@ function View(props: Props) {
                 >
                     <Pagination
                         sx={{
-                            "& .Mui-selected": { 
+                            "& .MuiPaginationItem-root.Mui-selected": { 
                                 backgroundColor: "#EC6724",
-                                color: "white"
+                                color: "#ffffff"
                             }
                         }}
                         count={Math.ceil(data.length / itemsPerPage)}

@@ -1,4 +1,4 @@
-import { Box, Button, Dialog, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Button, Dialog, IconButton, Typography } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
 import { Users } from "../dto/users";
 import FormTextField from "../../form-text-field.tsx";
@@ -25,7 +25,8 @@ const Modal = (props: Props) => {
                     display: "flex",
                     flexDirection: "column",
                     textAlign: "center",
-                    p: 2,
+                    p: 3,
+                    width: "500px",
                 }}
             >
                 <Box
@@ -57,17 +58,11 @@ const Modal = (props: Props) => {
                         <CloseIcon />
                     </IconButton>
                 </Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} >
-                        <FormTextField control={control} name={'name'} placeholder={'Digite o nome:'}/>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormTextField control={control} name={'salary'} placeholder={'Digite o salário: (R$)'}/>
-                    </Grid>
-                    <Grid item xs={12} mb={2}>
-                        <FormTextField control={control} name={'company_value'} placeholder={'Digite o valor da empresa: (R$)'}/>
-                    </Grid>
-                </Grid>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 2 }}>
+                    <FormTextField control={control} name={'name'} placeholder={'Digite o nome:'} />
+                    <FormTextField control={control} name={'salary'} placeholder={'Digite o salário: (R$)'} />
+                    <FormTextField control={control} name={'company_value'} placeholder={'Digite o valor da empresa: (R$)'} />
+                </Box>
                 <Button
                     type='submit'
                     variant="contained"

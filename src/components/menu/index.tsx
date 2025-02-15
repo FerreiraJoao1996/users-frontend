@@ -34,6 +34,9 @@ const AppBar = styled(MuiAppBar, {
 		duration: theme.transitions.duration.leavingScreen,
 	}),
 	height: '100px',
+	'@media (max-width: 350px)': {
+		height: '220px',
+	},
 	backgroundColor: '#ffffff',
 	...(open && {
 		width: `calc(100% - ${drawerWidth}px)`,
@@ -65,7 +68,16 @@ const SideMenu: React.FC = () => {
 	const userName = name ?? "Usuário";
 
 	return (
-		<Box sx={{ display: "flex", marginBottom: "100px" }}>
+		<Box 
+			sx={{ 
+				display: "flex", 
+				marginBottom: "100px",
+				'@media (max-width: 645px)': {
+					marginBottom: "200px",
+				},
+				
+			}}
+		>
 			<CssBaseline />
 			<AppBar position="fixed" open={open} theme={undefined}>
 				<Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
@@ -78,7 +90,7 @@ const SideMenu: React.FC = () => {
 						justifyContent: "space-between",
 						alignItems: "center",
 						flexGrow: 1,
-						flexWrap: "wrap",
+						flexWrap: "wrap"
 					}}>
 						<img src="public/images/teddy-logo.png" width={'180px'} style={{ maxWidth: '100%', height: 'auto' }} />
 
@@ -88,12 +100,15 @@ const SideMenu: React.FC = () => {
 							alignItems: "center",
 							flexWrap: "wrap",
 							justifyContent: "center",
+							'@media (max-width: 645px)': {
+								display: 'none',
+							},
 						}}>
 							<Typography
 								component={Link}
 								to="/users"
 								sx={{
-									color: location.pathname === "/users" ? "#EC6724" : "black",
+									color: location.pathname === "/users" ? "#EC6724" : "#000",
 									textDecoration: location.pathname === "/users" ? "underline" : "none",
 									fontWeight: "normal",
 								}}
@@ -105,7 +120,7 @@ const SideMenu: React.FC = () => {
 								component={Link}
 								to="/selected-users"
 								sx={{
-									color: location.pathname === "/selected-users" ? "#EC6724" : "black",
+									color: location.pathname === "/selected-users" ? "#EC6724" : "#000",
 									textDecoration: location.pathname === "/selected-users" ? "underline" : "none",
 									fontWeight: "normal",
 								}}
@@ -117,7 +132,7 @@ const SideMenu: React.FC = () => {
 								component={Link}
 								to="/"
 								sx={{
-									color: location.pathname === "/" ? "#EC6724" : "black",
+									color: location.pathname === "/" ? "#EC6724" : "#000",
 									textDecoration: location.pathname === "/" ? "underline" : "none",
 									fontWeight: "normal",
 								}}
@@ -126,7 +141,7 @@ const SideMenu: React.FC = () => {
 							</Typography>
 						</Box>
 
-						<Typography color="#000">Olá, {userName}!</Typography>
+						<Typography color="#000">Olá, <strong>{userName}</strong>!</Typography>
 					</Box>
 				</Toolbar>
 			</AppBar>
@@ -154,7 +169,7 @@ const SideMenu: React.FC = () => {
 							<ListItemText
 								primary="Home"
 								sx={{
-									color: location.pathname === "/" ? "#EC6724" : "black",
+									color: location.pathname === "/" ? "#EC6724" : "#000",
 									textDecoration: location.pathname === "/" ? "underline" : "none",
 									fontWeight: "normal",
 								}}
@@ -192,7 +207,7 @@ const SideMenu: React.FC = () => {
 								<PersonIcon />
 							</ListItemIcon>
 							<ListItemText primary="Clientes" sx={{
-								color: location.pathname === "/users" ? "#EC6724" : "black",
+								color: location.pathname === "/users" ? "#EC6724" : "#000",
 								textDecoration: location.pathname === "/users" ? "underline" : "none",
 								fontWeight: "normal",
 							}} />
@@ -205,7 +220,7 @@ const SideMenu: React.FC = () => {
 								<WindowIcon />
 							</ListItemIcon>
 							<ListItemText primary="Produtos" sx={{
-								color: location.pathname === "/products" ? "#EC6724" : "black",
+								color: location.pathname === "/products" ? "#EC6724" : "#000",
 								textDecoration: location.pathname === "/products" ? "underline" : "none",
 								fontWeight: "normal",
 							}} />
