@@ -20,7 +20,7 @@ Para executar o projeto, realize os seguinte procedimentos:
 2. Configure a `.env` do projeto para conexão com o banco de dados Postgres:
 
    ```env
-   VITE_BASE_URL=    # Geralmente, em uso local, usamos localhost
+   VITE_BASE_URL=    # Geralmente, em uso local, usamos [localhost](http://localhost:3000)
    ```
 
 4. Por fim, execute o comando para iniciar o projeto:
