@@ -59,9 +59,41 @@ const Modal = (props: Props) => {
                     </IconButton>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 2 }}>
-                    <FormTextField control={control} name={'name'} placeholder={'Digite o nome:'} />
-                    <FormTextField control={control} name={'salary'} placeholder={'Digite o salário: (R$)'} />
-                    <FormTextField control={control} name={'company_value'} placeholder={'Digite o valor da empresa: (R$)'} />
+                    <FormTextField 
+                        control={control} 
+                        name={'name'} 
+                        placeholder={'Digite o nome:'} 
+                        rules={{
+                            required: 'Este campo é obrigatório',
+                            pattern: {
+                                value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/,
+                                message: 'Digite apenas letras',
+                            },
+                        }} 
+                    />
+
+                    <FormTextField 
+                        control={control} 
+                        name={'salary'} 
+                        placeholder={'Digite o salário: (R$)'} 
+                        rules={{
+                        required: 'Este campo é obrigatório',
+                        pattern: {
+                            value: /^\d+$/,
+                            message: 'Digite apenas números',
+                        }
+                    }}/>
+                    <FormTextField 
+                        control={control} 
+                        name={'company_value'} 
+                        placeholder={'Digite o valor da empresa: (R$)'} 
+                        rules={{
+                        required: 'Este campo é obrigatório',
+                        pattern: {
+                            value: /^\d+$/,
+                            message: 'Digite apenas números',
+                        },
+                    }}/>
                 </Box>
                 <Button
                     type='submit'

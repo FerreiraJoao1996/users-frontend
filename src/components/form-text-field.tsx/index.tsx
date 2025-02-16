@@ -1,25 +1,24 @@
 import { TextField } from "@mui/material";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { Control, Controller, FieldValues, RegisterOptions } from "react-hook-form";
 
 interface Props {
     control: Control<FieldValues> | Control<any>; 
     name: string;
     placeholder?: string;
+    rules?: RegisterOptions
 }
 
 const FormTextField = (props: Props) => {
-    const { control, name, placeholder } = props;
+    const { control, name, placeholder, rules } = props;
 
     return (
        
         <Controller
             name={name}
             control={control}
-            rules={{
-                required: 'Este campo é obrigatório',
-            }}
+            rules={rules}
             defaultValue=""
-            render={({ field }) => (
+            render={({ field,fieldState }) => (
                 <TextField
                     sx={{
                         width: "100%",
@@ -35,6 +34,8 @@ const FormTextField = (props: Props) => {
                         },
                     }}
                     placeholder={placeholder ?? ""}
+                    error={!!fieldState.error}
+                    helperText={fieldState.error && fieldState.error.message}
                     {...field}
                 />
             )}
