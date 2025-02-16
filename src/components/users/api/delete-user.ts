@@ -11,8 +11,6 @@ export const useDeleteUser = () => {
 
 	return useMutation({
 		mutationFn: (userId: number) => deleteUser(userId),
-		mutationKey: mutationKey,
-		onSuccess: (response) => {
-		}
+		mutationKey: mutationKey
 	});
 };

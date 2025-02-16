@@ -1,4 +1,4 @@
-import { useIsMutating, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { CreateUser } from "../dto/users";
 import api from "../../../configs/api";
 
