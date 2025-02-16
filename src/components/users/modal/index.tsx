@@ -1,7 +1,7 @@
 import { Box, Button, Dialog, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
 import { Users } from "../dto/users";
-import FormTextField from "../../form-text-field.tsx";
+import FormTextField from "../../form-text-field";
 import { useUserStore } from "../../../store/index.ts";
 import CloseIcon from "@mui/icons-material/Close";
 import { useTheme } from "@mui/material/styles";
