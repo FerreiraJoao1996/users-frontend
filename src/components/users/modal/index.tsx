@@ -9,7 +9,7 @@ import { useTheme } from "@mui/material/styles";
 interface Props {
     form: UseFormReturn<Users>;
     onSubmit: (data: Users) => void;
-    mode: 'create' | 'edit';
+    mode: 'create' | 'edit'
 }
 
 const Modal = (props: Props) => {
@@ -23,7 +23,7 @@ const Modal = (props: Props) => {
     return (
         <Dialog open={modalOpen} onClose={closeModal} fullScreen={isMobile}>
             <Box
-                component="form"
+                component={"form"}
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{
                     display: "flex",

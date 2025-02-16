@@ -39,7 +39,7 @@ function Home () {
                 fontSize={{ xs: 16, sm: 20, md: 24 }}
                 sx={{
                     fontWeight: 400,
-                    marginBottom: 2,
+                    marginBottom: 1,
                 }}
             >
                 Olá, seja bem-vindo!
