@@ -1,11 +1,3 @@
-Para executar o projeto, realize os seguinte procedimentos:
-
-- Execute npm install na versao mais recente do node (22.14.0)
-- Configure a env do projeto para buscar na api (VITE_BASE_URL)
-- Rode o comando npm run dev
-
-
-
 # Instruções para Execução do Projeto
 
 ## Versões Utilizadas
