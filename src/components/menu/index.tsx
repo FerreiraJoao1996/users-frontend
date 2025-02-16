@@ -34,9 +34,6 @@ const AppBar = styled(MuiAppBar, {
 		duration: theme.transitions.duration.leavingScreen,
 	}),
 	height: '100px',
-	'@media (max-width: 350px)': {
-		height: '220px',
-	},
 	backgroundColor: '#ffffff',
 	...(open && {
 		width: `calc(100% - ${drawerWidth}px)`,
@@ -72,10 +69,6 @@ const SideMenu: React.FC = () => {
 			sx={{ 
 				display: "flex", 
 				marginBottom: "100px",
-				'@media (max-width: 645px)': {
-					marginBottom: "200px",
-				},
-				
 			}}
 		>
 			<CssBaseline />
@@ -90,7 +83,10 @@ const SideMenu: React.FC = () => {
 						justifyContent: "space-between",
 						alignItems: "center",
 						flexGrow: 1,
-						flexWrap: "wrap"
+						flexWrap: "wrap",
+						'@media (max-width: 645px)': {
+							display: 'none',
+						},
 					}}>
 						<img src="public/images/teddy-logo.png" width={'180px'} style={{ maxWidth: '100%', height: 'auto' }} />
 
@@ -99,10 +95,7 @@ const SideMenu: React.FC = () => {
 							gap: 2,
 							alignItems: "center",
 							flexWrap: "wrap",
-							justifyContent: "center",
-							'@media (max-width: 645px)': {
-								display: 'none',
-							},
+							justifyContent: "center"
 						}}>
 							<Typography
 								component={Link}

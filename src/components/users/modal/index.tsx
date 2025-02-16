@@ -1,14 +1,15 @@
-import { Box, Button, Dialog, IconButton, Typography } from "@mui/material";
+import { Box, Button, Dialog, IconButton, Typography, useMediaQuery } from "@mui/material";
 import { UseFormReturn } from "react-hook-form";
 import { Users } from "../dto/users";
 import FormTextField from "../../form-text-field.tsx";
 import { useUserStore } from "../../../store/index.ts";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTheme } from "@mui/material/styles";
 
 interface Props {
     form: UseFormReturn<Users>;
     onSubmit: (data: Users) => void;
-    mode: 'create' | 'edit'
+    mode: 'create' | 'edit';
 }
 
 const Modal = (props: Props) => {
@@ -16,17 +17,21 @@ const Modal = (props: Props) => {
     const { modalOpen, closeModal } = useUserStore();
     const { handleSubmit, control } = form;
 
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
     return (
-        <Dialog open={modalOpen} onClose={closeModal}>
+        <Dialog open={modalOpen} onClose={closeModal} fullScreen={isMobile}>
             <Box
-                component={"form"}
+                component="form"
                 onSubmit={handleSubmit(onSubmit)}
                 sx={{
                     display: "flex",
                     flexDirection: "column",
                     textAlign: "center",
                     p: 3,
-                    width: "500px",
+                    width: isMobile ? "90vw" : "500px",
+                    maxWidth: "100%",
                 }}
             >
                 <Box
@@ -34,7 +39,7 @@ const Modal = (props: Props) => {
                         display: "flex",
                         justifyContent: "space-between",
                         alignItems: "center",
-                        mb: 1,
+                        mb: 2,
                     }}
                 >
                     <Typography
@@ -42,61 +47,59 @@ const Modal = (props: Props) => {
                         fontWeight="bold"
                         sx={{ textAlign: "left", flex: 1 }}
                     >
-                        {mode === 'create' ? 'Criar cliente:' : 'Editar cliente:'}
+                        {mode === "create" ? "Criar cliente:" : "Editar cliente:"}
                     </Typography>
                     <IconButton
                         onClick={closeModal}
                         sx={{
-                            width: "0.8em",
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
                             color: "#000",
-                            p: 0
+                            p: 0,
                         }}
                     >
                         <CloseIcon />
                     </IconButton>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2, mb: 2 }}>
-                    <FormTextField 
-                        control={control} 
-                        name={'name'} 
-                        placeholder={'Digite o nome:'} 
+                    <FormTextField
+                        control={control}
+                        name="name"
+                        placeholder="Digite o nome:"
                         rules={{
-                            required: 'Este campo é obrigatório',
+                            required: "Este campo é obrigatório",
                             pattern: {
                                 value: /^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/,
-                                message: 'Digite apenas letras',
+                                message: "Digite apenas letras",
                             },
-                        }} 
+                        }}
                     />
 
-                    <FormTextField 
-                        control={control} 
-                        name={'salary'} 
-                        placeholder={'Digite o salário: (R$)'} 
+                    <FormTextField
+                        control={control}
+                        name="salary"
+                        placeholder="Digite o salário: (R$)"
                         rules={{
-                        required: 'Este campo é obrigatório',
-                        pattern: {
-                            value: /^\d+$/,
-                            message: 'Digite apenas números',
-                        }
-                    }}/>
-                    <FormTextField 
-                        control={control} 
-                        name={'company_value'} 
-                        placeholder={'Digite o valor da empresa: (R$)'} 
+                            required: "Este campo é obrigatório",
+                            pattern: {
+                                value: /^\d+$/,
+                                message: "Digite apenas números",
+                            },
+                        }}
+                    />
+                    <FormTextField
+                        control={control}
+                        name="company_value"
+                        placeholder="Digite o valor da empresa: (R$)"
                         rules={{
-                        required: 'Este campo é obrigatório',
-                        pattern: {
-                            value: /^\d+$/,
-                            message: 'Digite apenas números',
-                        },
-                    }}/>
+                            required: "Este campo é obrigatório",
+                            pattern: {
+                                value: /^\d+$/,
+                                message: "Digite apenas números",
+                            },
+                        }}
+                    />
                 </Box>
                 <Button
-                    type='submit'
+                    type="submit"
                     variant="contained"
                     sx={{
                         width: "100%",
@@ -105,7 +108,7 @@ const Modal = (props: Props) => {
                         textTransform: "none",
                     }}
                 >
-                    {mode === 'create' ? 'Criar cliente' : 'Editar cliente'}
+                    {mode === "create" ? "Criar cliente" : "Editar cliente"}
                 </Button>
             </Box>
         </Dialog>

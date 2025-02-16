@@ -85,11 +85,18 @@ function View(props: Props) {
                 sx={{
                     display: "flex",
                     justifyContent:"space-between",
-                    alignItems: "center"
+                    alignItems: "center",
+                    '@media (max-width: 645px)': {
+                        flexWrap: 'wrap',
+                    },
                 }}
             >
-                <Typography variant="h5" textAlign={'start'} mb={2}>
-                    <strong>{currentItems.length}</strong> clientes encontrados:
+                <Typography 
+                    variant="h5" 
+                    textAlign={'start'} 
+                    mb={2}
+                >
+                    <strong>{currentItems.length}</strong> clientes encontrados
                 </Typography>
                 <Box
                     sx={{
