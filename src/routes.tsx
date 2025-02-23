@@ -5,6 +5,7 @@ import Logic from "./components/users/logic";
 import DeleteModal from "./components/modal/delete/delete";
 import SelectedUsers from "./components/selected-users";
 import Layout from "./components/layout/index.tsx";
+import NotFoundPage from "./components/error/index.tsx";
 
 function RoutesApp() {
   return (
@@ -21,6 +22,7 @@ function RoutesApp() {
               <Routes>
                 <Route path="/users" element={<Logic />} />
                 <Route path="/selected-users" element={<SelectedUsers />} />
+                <Route path="/*" element={<NotFoundPage />} />
               </Routes>
             </Layout>
           }
