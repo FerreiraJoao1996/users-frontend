@@ -1,5 +1,5 @@
 import { Box, Pagination } from '@mui/material';
-import { Users } from '../users/dto/users';
+import { Users } from '../../users/dto/users';
 
 interface Props {
     data: Users[];
