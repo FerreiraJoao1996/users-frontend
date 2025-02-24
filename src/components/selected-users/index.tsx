@@ -5,7 +5,7 @@ import { useUserPersistStore } from '../../store/user-persist';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { formatCurrency } from '../../utils/format-currency';
-
+import ButtonSubmit from '../buttons/button-submit';
 
 function SelectedUsers() {
     const { removeUser, users, setUsers } = useUserPersistStore();
@@ -25,69 +25,52 @@ function SelectedUsers() {
 
     return (
         <>
-        <Typography variant="h4" fontWeight={'bold'} textAlign={'start'} mb={2}>
-            Clientes Selecionados:
-        </Typography>
-        <Box sx={{ marginBottom: 2 }}>
-            <Box
-                mb={2}
-                sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 2,
-                    justifyContent: 'space-between',
-                }}
-            >
-                {users.map((item) => (
-                    <Box
-                        key={item.id}
-                        sx={{
-                            flex: '1 1 20%',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: 2,
-                            borderRadius: '4px',
-                            boxShadow: '0px 0px 4px 0px #0000001A',
-                            '@media (max-width: 1024px)': {
-                                flex: '1 1 45%',
-                            },
-                            '@media (max-width: 600px)': {
-                                flex: '1 1 100%',
-                            }
-                        }}
-                    >
-                        <Typography>{item.name}</Typography>
-                        <Typography>{String(formatCurrency(item.salary))}</Typography>
-                        <Typography>{String(formatCurrency(item.company_value))}</Typography>
-                        <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
-                            <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
-                                <RemoveIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
-                            </Button>
-                        </Box>
-                    </Box>
-                ))}
-            </Box>
-            <Box>
-                <Button
-                    type="submit"
-                    variant="contained"
+            <Typography variant="h6" fontWeight={'bold'} textAlign={'start'} mb={2}>
+                Clientes Selecionados: {users.length}
+            </Typography>
+            <Box sx={{ marginBottom: 2 }}>
+                <Box
+                    mb={2}
                     sx={{
-                        width: '100%',
-                        backgroundColor: '#ffff',
-                        fontWeight: 'bold',
-                        textTransform: 'none',
-                        color: '#EC6724',
-                        border: '2px solid #EC6724',
-                        boxShadow: 'none'
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: 2,
+                        justifyContent: 'space-between',
                     }}
-                    onClick={handleClean}
                 >
-                    Limpar Clientes Selecionados
-                </Button>
+                    {users.map((item) => (
+                        <Box
+                            key={item.id}
+                            sx={{
+                                flex: '1 1 20%',
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                padding: 2,
+                                borderRadius: '4px',
+                                boxShadow: '0px 0px 4px 0px #0000001A',
+                                '@media (max-width: 1024px)': {
+                                    flex: '1 1 45%',
+                                },
+                                '@media (max-width: 600px)': {
+                                    flex: '1 1 100%',
+                                }
+                            }}
+                        >
+                            <Typography>{item.name}</Typography>
+                            <Typography>{String(formatCurrency(item.salary))}</Typography>
+                            <Typography>{String(formatCurrency(item.company_value))}</Typography>
+                            <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', gap: 1 }}>
+                                <Button sx={{ flex: 1 }} onClick={() => handleRemove(item.id)}>
+                                    <RemoveIcon fontSize={'medium'} sx={{ color: "#000", fontWeight: "bold", background: "none" }} />
+                                </Button>
+                            </Box>
+                        </Box>
+                    ))}
+                </Box>
+                <ButtonSubmit onClick={handleClean} text={'Limpar Clientes Selecionados'} color={"#EC6724"} />
             </Box>
-        </Box>
         </>
     );
 }
