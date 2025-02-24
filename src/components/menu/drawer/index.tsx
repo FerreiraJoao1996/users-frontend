@@ -3,7 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import HomeIcon from "@mui/icons-material/Home";
+import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from "@mui/icons-material/Person";
 import { Tooltip } from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -40,54 +40,52 @@ const SideDrawer = (props: Props) => {
         >
             <DrawerHeader
                 sx={{
-                    backgroundColor: "#363636",
-                    borderTopRightRadius: "8px",
+                    backgroundColor: "#EC6724",
+                    borderTopRightRadius: "15px",
+                    border: "none"
                 }}
             >
+                <Tooltip title="Fechar menu">
+                    <IconButton
+                        onClick={handleDrawerToggle}
+                        sx={{
+                            width: "30px",
+                            height: "30px",
+                            position: "absolute",
+                            top: 0,
+                            right: 0,
+                            backgroundColor: "#ffffff",
+                            color: "#EC6724",
+                            borderRadius: "50%",
+                            border: "1px solid #d4d4d4",
+                            padding: "8px",
+                            "&:hover": {
+                                backgroundColor: "#EC6724",
+                                color: "#ffffff",
+                            },
+                        }}
+                    >
+                        <ArrowBackIcon fontSize="small" />
+                    </IconButton>
+                </Tooltip>
                 <img
                     src="public/images/lorem-ipsum.png"
                     width={"180px"}
-                    style={{ objectFit: "cover" }}
+                    style={{ objectFit: "cover", margin: "0 auto" }}
                 />
             </DrawerHeader>
             <Divider />
             <List>
                 <ItemList
-                    pathnameToRedirect={'/'}
-                    children={
-                        <Tooltip title="Fechar menu">
-                            <IconButton
-                                onClick={handleDrawerToggle}
-                                sx={{
-                                    width: "30px",
-                                    height: "30px",
-                                    position: "absolute",
-                                    top: 0,
-                                    right: 0,
-                                    translate: '0 -75%',
-                                    backgroundColor: "#ffffff",
-                                    color: "#000",
-                                    borderRadius: "50%",
-                                    border: "1px solid #d4d4d4",
-                                    padding: "8px",
-                                    "&:hover": {
-                                        backgroundColor: "#000",
-                                        color: "#ffffff",
-                                    },
-                                }}
-                            >
-                                <ArrowBackIcon fontSize="small" />
-                            </IconButton>
-                        </Tooltip>
-                    }
-                    icon={<HomeIcon />}
-                    itemListName={"Home"}
-                />
-                <Divider />
-                <ItemList
                     pathnameToRedirect={'/users'}
                     icon={<PersonIcon />}
                     itemListName={"Clientes"}
+                />
+                <Divider />
+                <ItemList
+                    pathnameToRedirect={'/selected-users'}
+                    icon={<GroupIcon />}
+                    itemListName={"Selecionados"}
                 />
                 <Divider />
             </List>

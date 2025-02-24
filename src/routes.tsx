@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./components/home";
+import Login from "./components/login/index.tsx";
 import { Toaster } from "react-hot-toast";
 import Logic from "./components/users/logic";
 import DeleteModal from "./components/modal/delete/delete";
 import SelectedUsers from "./components/selected-users";
 import Layout from "./components/layout/index.tsx";
-import NotFoundPage from "./components/error/index.tsx";
+import NotFoundPage from "./components/global/error/index.tsx";
 
 function RoutesApp() {
   return (
@@ -14,7 +14,7 @@ function RoutesApp() {
       <DeleteModal/>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route
           path="/*"
           element={

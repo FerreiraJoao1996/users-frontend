@@ -5,7 +5,7 @@ import { useUserPersistStore } from '../../store/user-persist';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { formatCurrency } from '../../utils/format-currency';
-import ButtonSubmit from '../buttons/button-submit';
+import ButtonSubmit from '../global/buttons/button-submit';
 
 function SelectedUsers() {
     const { removeUser, users, setUsers } = useUserPersistStore();

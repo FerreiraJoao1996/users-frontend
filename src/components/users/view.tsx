@@ -3,10 +3,10 @@ import { Box, Typography, SelectChangeEvent } from '@mui/material';
 import { Users } from './dto/users';
 import { UseFormReturn } from 'react-hook-form';
 import { useUserStore } from '../../store';
-import ButtonSubmit from '../buttons/button-submit';
-import PaginationComponent from '../pagination';
+import ButtonSubmit from '../global/buttons/button-submit';
 import UserBox from './user';
-import ItemsPerPageSelect from '../selects/item-per-page';
+import ItemsPerPageSelect from '../global/selects/item-per-page';
+import PaginationComponent from '../global/pagination';
 
 interface Props {
     data: Users[];

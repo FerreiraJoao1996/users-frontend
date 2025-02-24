@@ -1,20 +1,12 @@
 import Box from '@mui/material/Box';
-import { Button, TextField, Typography } from "@mui/material";
-import { useUserStore } from '../../store';
-import toast from 'react-hot-toast';
+import { Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import ButtonSubmit from '../global/buttons/button-submit';
 
-function Home () {
-    const { setName, name } = useUserStore();
+function Login () {
     const navigate = useNavigate();
-    const handleName = (value: string) => {
-        if(value !== null && value !== "") setName(value)
-    }
 
-    const handleChange = () => {
-        if(name === null || name === "") 
-            return toast.error("Preencha seu nome para continuar!")
-
+    const handleChange = () => { 
         return navigate("/users")
     }
 
@@ -45,7 +37,7 @@ function Home () {
                 Olá, seja bem-vindo!
             </Typography>
 
-            <TextField 
+            {/* <TextField 
                 variant="outlined" 
                 placeholder="Digite o seu nome:"
                 sx={{
@@ -61,26 +53,10 @@ function Home () {
                     },
                 }}
                 onChange={(e) => handleName(e.currentTarget.value)}
-            />
-
-            <Button
-                sx={{
-                    width: { xs: "90%", sm: "300px" },
-                    backgroundColor: "#EC6724",
-                    fontWeight: "bold",
-                    textTransform: "none",
-                    "&:hover": {
-                        backgroundColor: "#d55a1e",
-                    },
-                }}
-                variant="contained" 
-                type="submit"
-                onClick={handleChange}
-            >
-                Entrar
-            </Button>
+            /> */}
+            <ButtonSubmit onClick={handleChange} text={'Entrar'} color={"#EC6724"} />
         </Box>
     );
 }
 
-export default Home;
+export default Login;

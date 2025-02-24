@@ -2,7 +2,14 @@ import { useLocation } from "react-router-dom";
 import SideMenu from "../menu";
 import { Box } from "@mui/material";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+interface Props {
+  children: React.ReactNode
+}
+
+const Layout = (props: Props) => {
+
+  const{ children } = props;
+
   const location = useLocation();
   const showSideMenu = location.pathname !== "/";
 
