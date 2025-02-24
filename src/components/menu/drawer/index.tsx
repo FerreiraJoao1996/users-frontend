@@ -45,7 +45,7 @@ const SideDrawer = (props: Props) => {
                 }}
             >
                 <img
-                    src="public/images/teddy-logo.png"
+                    src="public/images/lorem-ipsum.png"
                     width={"180px"}
                     style={{ objectFit: "cover" }}
                 />

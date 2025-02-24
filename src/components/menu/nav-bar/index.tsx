@@ -38,10 +38,12 @@ const NavBar = (props: Props) => {
     return (
         <AppBar position="fixed" open={open} drawerWidth={drawerWidth} theme={undefined}>
             <Toolbar sx={{ display: "flex", alignItems: "center", justifyContent: "flex-start" }}>
-                <Button onClick={handleDrawerToggle} sx={{ minWidth: "auto", padding: 0, color: "#000" }}>
-                    <MenuIcon />
-                </Button>
-
+                {!open && (
+                    <Button onClick={handleDrawerToggle} sx={{ minWidth: "auto", padding: 0, color: "#000" }}>
+                        <MenuIcon />
+                    </Button>
+                )}
+                
                 <Box
                     sx={{
                         display: "flex",
@@ -54,7 +56,7 @@ const NavBar = (props: Props) => {
                         },
                     }}
                 >
-                    <img src="/images/teddy-logo.png" width={"180px"} style={{ maxWidth: "100%", height: "auto" }} />
+                    <img src="/images/lorem-ipsum.png" width={"110"} style={{ maxWidth: "100%", height: "auto" }} />
 
                     <Box
                         sx={{

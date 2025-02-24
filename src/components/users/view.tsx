@@ -56,7 +56,7 @@ function View(props: Props) {
                     textAlign={'start'} 
                     mb={2}
                 >
-                    <strong>{currentItems.length}</strong> clientes encontrados
+                    <strong>{currentItems.length}</strong> Clientes encontrado(s)
                 </Typography>
                 <Box
                     sx={{

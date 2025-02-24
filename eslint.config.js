@@ -24,8 +24,8 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
     },
-    rules: {
-        "@typescript-eslint/no-explicit-any": "warn"
-    }
+    // rules: {
+    //     "@typescript-eslint/no-explicit-any": "warn"
+    // }
   },
 )
