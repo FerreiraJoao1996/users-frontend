@@ -4,8 +4,7 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Button } from "@mui/material";
-
-import Option from "./option";
+import DropdownMenu from "../dropdown-menu.tsx";
 
 interface Props {
     open: boolean;
@@ -57,20 +56,7 @@ const NavBar = (props: Props) => {
                     }}
                 >
                     <img src="/images/lorem-ipsum.png" width={"110"} style={{ maxWidth: "100%", height: "auto" }} />
-
-                    <Box
-                        sx={{
-                            display: "flex",
-                            gap: 2,
-                            alignItems: "center",
-                            flexWrap: "wrap",
-                            justifyContent: "center",
-                        }}
-                    >
-                        <Option pathnameToRedirect={"/users"} itemListName={"Clientes"} />
-                        <Option pathnameToRedirect={"/selected-users"} itemListName={"Clientes Selecionados"} />
-                    </Box>
-                    <Option pathnameToRedirect={"/"} itemListName={"Sair"} />
+                    <DropdownMenu />
                 </Box>
             </Toolbar>
         </AppBar>
