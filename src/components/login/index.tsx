@@ -1,31 +1,20 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { LoginDTO } from "./dto/login-dto";
 import View from "./view";
 import { useLogin } from "./api/login";
 
 function Login() {
-
-    const navigate = useNavigate();
-    
-    const { mutateAsync: login } = useLogin();
-
-    const defaultValues: LoginDTO = {
-        username: "",
-        password: "",
-    };
+    const { mutate: login } = useLogin();
 
     const form = useForm<LoginDTO>({
-        defaultValues: defaultValues
+        defaultValues: {
+            username: "",
+            password: "",
+        }
     });
 
     const onSubmit = (data: LoginDTO) => {
-        return navigate("/")
-        login(data, {
-            onSuccess: () => {
-                return navigate("/")
-            }
-        });
+        login(data);
     };
 
     return (
@@ -34,6 +23,6 @@ function Login() {
             onSubmit={onSubmit}
         />
     );
-}
+};
 
 export default Login;

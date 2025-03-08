@@ -1,32 +1,42 @@
-import { useMutation } from "@tanstack/react-query";
+import { useIsMutating, useMutation } from "@tanstack/react-query";
 import api from "../../../configs/api";
 import { LoginDTO } from "../dto/login-dto";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/auth-context";
 
-interface Response {
-    login: Login
-}
-
-interface Login {
-    code: number;
-    token: string;
-}
-
-export const login = async (
-	data: LoginDTO
-) => {
-	return await api.post<Response>(
-		'/login',
-		data
-	);
+const loginRequest = async (data: LoginDTO) => {
+    const response = await api.post('/login', data);
+    return response.data;
 };
 
-const mutationKey = ["login/user"];
+const LOGIN_MUTATION_KEY = ["login_mutation"];
+
+export function useIsLoggingIn() {
+    return Boolean(useIsMutating({ mutationKey: LOGIN_MUTATION_KEY }));
+}
 
 export const useLogin = () => {
+    const { login: loginAuth } = useAuth();
+    const navigate = useNavigate();
 
-	return useMutation({
-		mutationFn: (data: LoginDTO) =>
-			login(data),
-		mutationKey: mutationKey
-	});
+    return useMutation({
+        mutationFn: loginRequest,
+        mutationKey: LOGIN_MUTATION_KEY,
+        gcTime: 0,
+        onSuccess: (data) => {
+            const token = data?.token;
+            const user = data?.user;
+
+            if (token && user) {
+                loginAuth(user, token);
+                api.defaults.headers.common.Authorization = `Bearer ${token}`;
+                navigate("/");
+            } else {
+                throw new Error("Token ou usuário inválido!");
+            }
+        },
+        onError: () => {
+            throw new Error("Erro ao fazer login!");
+        }
+    });
 };
