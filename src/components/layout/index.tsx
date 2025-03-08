@@ -11,7 +11,7 @@ const Layout = (props: Props) => {
   const{ children } = props;
 
   const location = useLocation();
-  const showSideMenu = location.pathname !== "/";
+  const showSideMenu = location.pathname !== "/login";
 
   return (
     <Box>

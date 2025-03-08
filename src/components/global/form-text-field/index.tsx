@@ -25,6 +25,7 @@ const FormTextField = (props: Props) => {
                         fontWeight: "bold",
                         textTransform: "none",
                         "& .MuiOutlinedInput-root": {
+                            height: "2.5em",
                             "&:hover fieldset": {
                                 borderColor: "#EC6724",
                             },
